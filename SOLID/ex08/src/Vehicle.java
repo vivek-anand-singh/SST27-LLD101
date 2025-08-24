@@ -1,5 +1,3 @@
-public interface Vehicle {
-    void startEngine();
-    void pedal(int effort);
-    void recharge(int kWh);
+public abstract class Vehicle {
+    public abstract void move();
 }
