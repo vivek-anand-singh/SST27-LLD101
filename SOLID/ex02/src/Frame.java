@@ -4,4 +4,8 @@ public class Frame {
     { 
         this.data=d; 
     } 
+
+    void drawUI(){
+       System.out.println("\u25B6 Playing " + data.length + " bytes"); 
+    }
 }
