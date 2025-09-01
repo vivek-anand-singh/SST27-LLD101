@@ -11,11 +11,23 @@ import java.util.Properties;
  */
 public class AppSettings implements Serializable {
     private final Properties props = new Properties();
-
-    public AppSettings() { } // should not be public for true singleton
+    private static  volatile AppSettings instance; // should be final for true singleton
+    AppSettings() { 
+        if(instance != null){
+            throw new IllegalStateException("Already initialized");
+        }
+    } // should not be public for true singleton
 
     public static AppSettings getInstance() {
-        return new AppSettings(); // returns a fresh instance (bug)
+        if (instance == null) {
+            synchronized (AppSettings.class) {
+                instance = instance;
+                if (instance == null) {
+                    instance = instance = new AppSettings();
+                }
+            }
+        }
+        return instance;
     }
 
     public void loadFromFile(Path file) {
